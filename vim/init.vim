@@ -20,6 +20,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'alvan/vim-closetag'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-repeat'
 Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
 
