@@ -2,7 +2,8 @@
 "@pgurung
 set nocompatible
 filetype off
-filetype indent on   
+filetype plugin indent on 
+runtime macros/matchit.vim
 
 let mapleader = ' '
 

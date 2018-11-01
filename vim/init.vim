@@ -40,7 +40,8 @@ Plug 'mxw/vim-jsx'
 Plug 'haishanh/night-owl.vim'
 
 call plug#end()
-filetype plugin indent on   
+filetype plugin indent on 
+runtime macros/matchit.vim
 
 let mapleader = ' '
 
@@ -60,7 +61,12 @@ command! E e
 command! W w
 command! Wq wq
 
+"Exit out of normal mode and save
 imap <C-s> <esc>:w<cr>
+vnoremap <C-c> "*y
+
+"Remap esc to C-\_C-n in terminal mode
+tnoremap <Esc> <C-\><C-n>
 
 let g:python3_host_prog='/usr/local//Cellar/python/3.7.0/bin/python3'
 
@@ -72,7 +78,7 @@ let g:ale_linters = {
             \ 'html': [ 'tsserver' ],
             \ }
 let g:ale_fixers = {
-            \ 'javascript': [ 'eslint' ],
+            \ 'javascript': [ 'prettier' ],
             \ }
 let g:ale_linter_aliases = { 'html': ['ts'] }
 
