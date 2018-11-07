@@ -54,6 +54,9 @@ set laststatus=2
 set noshowmode
 set hidden
 
+"searching
+set ignorecase
+set smartcase
 "Splits are created below and to the right
 set splitbelow
 set splitright
