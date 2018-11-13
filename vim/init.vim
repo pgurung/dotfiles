@@ -53,6 +53,7 @@ nmap j gj
 imap jk <esc>
 imap kj <esc>
 
+"Common Typos
 command! Q q
 command! Qall qall
 command! QA qall
@@ -60,8 +61,16 @@ command! E e
 command! W w
 command! Wq wq
 
+" Disable arrow Keys
+nnoremap <Left> :echoe "Use h"<CR>
+nnoremap <Right> :echoe "Use l"<CR>
+nnoremap <Up> :echoe "Use k"<CR>
+nnoremap <Down> :echoe "Use j"<CR>
+
 "Exit out of normal mode and save
 imap <C-s> <esc>:w<cr>
+
+" Ctrl-c copies to system clipboard from visual mode
 vnoremap <C-c> "*y
 
 "Remap esc to C-\_C-n in terminal mode

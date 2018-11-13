@@ -10,12 +10,17 @@ let mapleader = ' '
 " Execute macro in q
 map Q @q
 
+"move to first character instead of the very beginning of the line
 nmap 0 ^
+
+"Move one global line at a time instead of what vim thinks is a line
 nmap k gk
 nmap j gj
+
 imap jk <esc>
 imap kj <esc>
 
+"Common Typos
 command! Q q
 command! Qall qall
 command! QA qall
@@ -23,6 +28,13 @@ command! E e
 command! W w
 command! Wq wq
 
+" Disable arrow Keys
+nnoremap <Left> :echoe "Use h"<CR>
+nnoremap <Right> :echoe "Use l"<CR>
+nnoremap <Up> :echoe "Use k"<CR>
+nnoremap <Down> :echoe "Use j"<CR>
+
+"Save and exit out of insert mode
 imap <C-s> <esc>:w<cr>
 
 "Autoclose preview windows
@@ -57,6 +69,7 @@ set hidden
 "searching
 set ignorecase
 set smartcase
+
 "Splits are created below and to the right
 set splitbelow
 set splitright
