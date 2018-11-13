@@ -21,6 +21,7 @@ Plug 'alvan/vim-closetag'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-vinegar'
 Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
 
@@ -36,8 +37,6 @@ Plug 'mxw/vim-jsx'
 "Go Plugins
 " Plug 'fatih/vim-go', {'do': ':GoInstallBinaries'}
 
-" Themes
-Plug 'haishanh/night-owl.vim'
 
 call plug#end()
 filetype plugin indent on 
@@ -141,7 +140,7 @@ if (has("termguicolors"))
 endif
 
 "let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-colorscheme night-owl
+colorscheme Tomorrow-Night-Blue
 set background=dark
 let g:gruvbox_italic=1
 
