@@ -24,6 +24,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-vinegar'
 Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
+Plug 'easymotion/vim-easymotion'
 
 Plug 'tpope/vim-fugitive'
 Plug 'christoomey/vim-tmux-navigator'
@@ -33,9 +34,10 @@ Plug 'pangloss/vim-javascript'
 Plug 'ap/vim-css-color'
 Plug 'mattn/emmet-vim'
 Plug 'mxw/vim-jsx'
+Plug 'leafgarland/typescript-vim'
 
 "Go Plugins
-" Plug 'fatih/vim-go', {'do': ':GoInstallBinaries'}
+Plug 'fatih/vim-go', {'do': ':GoInstallBinaries'}
 
 
 call plug#end()
@@ -76,7 +78,7 @@ vnoremap <C-c> "*y
 "Remap esc to C-\_C-n in terminal mode
 tnoremap <Esc> <C-\><C-n>
 
-let g:python3_host_prog='/usr/local//Cellar/python/3.7.0/bin/python3'
+let g:python3_host_prog='/usr/local/bin/python3'
 
 "Ale config
 let g:ale_completion_enabled = 1
@@ -87,6 +89,8 @@ let g:ale_linters = {
             \ }
 let g:ale_fixers = {
             \ 'javascript': [ 'prettier' ],
+            \ 'typescript': [ 'prettier' ],
+            \'html':['prettier']
             \ }
 let g:ale_linter_aliases = { 'html': ['ts'] }
 
@@ -137,6 +141,18 @@ nnoremap <c-p> :FZF<cr>
 " vim-go config 
 let g:go_fmt_command = "goimports"
 
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+
+" Jump to anywhere you want with minimal keystrokes, with just one key binding.
+" `s{char}{label}`
+nmap s <Plug>(easymotion-overwin-f)
+
+" Turn on case insensitive feature
+let g:EasyMotion_smartcase = 1
+
+" JK motions: Line motions
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
 
 "Autoclose preview windows
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
