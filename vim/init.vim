@@ -40,6 +40,9 @@ Plug 'leafgarland/typescript-vim'
 Plug 'fatih/vim-go', {'do': ':GoInstallBinaries'}
 Plug 'zchee/deoplete-go', { 'do': 'make'}
 
+"Colorscheme
+Plug 'morhetz/gruvbox'
+
 
 call plug#end()
 filetype plugin indent on 
@@ -141,6 +144,8 @@ nnoremap <c-p> :FZF<cr>
 
 " vim-go config 
 let g:go_fmt_command = "goimports"
+let g:go_highlight_functions=1
+let g:go_highlight_function_calls=1
 
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
 
@@ -166,7 +171,8 @@ if (has("termguicolors"))
 endif
 
 "let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-colorscheme Tomorrow-Night-Blue
+let g:gruvbox_contrast_dark='hard'
+colorscheme gruvbox 
 set background=dark
 let g:gruvbox_italic=1
 
@@ -221,7 +227,7 @@ set diffopt+=vertical
 nnoremap <silent> <leader>n :nohlsearch <CR>
 
 let g:lightline = {
-      \ 'colorscheme': 'wombat',
+      \ 'colorscheme': 'gruvbox',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
