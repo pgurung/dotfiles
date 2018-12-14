@@ -144,8 +144,13 @@ nnoremap <c-p> :FZF<cr>
 
 " vim-go config 
 let g:go_fmt_command = "goimports"
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
 let g:go_highlight_functions=1
 let g:go_highlight_function_calls=1
+
+autocmd FileType go nmap <leader>b  <Plug>(go-build)
+autocmd FileType go nmap <leader>r  <Plug>(go-run)
 
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
 
@@ -208,12 +213,12 @@ set history=50
 set nobackup
 set nowritebackup
 set ruler
-"set autowrite
+set autowrite
 
 "numbers
 set numberwidth=5
 set number
-set relativenumber
+"set relativenumber
 
 " Quicker window movement
 nnoremap <C-j> <C-w>j
