@@ -24,7 +24,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-vinegar'
 Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
-Plug 'easymotion/vim-easymotion'
+Plug 'unblevable/quick-scope'
 
 Plug 'tpope/vim-fugitive'
 Plug 'christoomey/vim-tmux-navigator'
@@ -41,7 +41,8 @@ Plug 'fatih/vim-go', {'do': ':GoInstallBinaries'}
 Plug 'zchee/deoplete-go', { 'do': 'make'}
 
 "Colorscheme
-Plug 'morhetz/gruvbox'
+"Plug 'morhetz/gruvbox'
+Plug 'drewtempelmeyer/palenight.vim'
 
 
 call plug#end()
@@ -152,18 +153,9 @@ let g:go_highlight_function_calls=1
 autocmd FileType go nmap <leader>b  <Plug>(go-build)
 autocmd FileType go nmap <leader>r  <Plug>(go-run)
 
-let g:EasyMotion_do_mapping = 0 " Disable default mappings
+" Quick Scope Trigger a highlight in the appropriate direction when pressing these keys:
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
-" Jump to anywhere you want with minimal keystrokes, with just one key binding.
-" `s{char}{label}`
-nmap s <Plug>(easymotion-overwin-f)
-
-" Turn on case insensitive feature
-let g:EasyMotion_smartcase = 1
-
-" JK motions: Line motions
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
 
 "Autoclose preview windows
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
@@ -176,10 +168,11 @@ if (has("termguicolors"))
 endif
 
 "let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-let g:gruvbox_contrast_dark='hard'
-colorscheme gruvbox 
+"let g:gruvbox_contrast_dark='hard'
+colorscheme palenight
 set background=dark
-let g:gruvbox_italic=1
+"let g:gruvbox_italic=1
+let g:palenight_terminal_italics=1
 
 
 "Indenting
@@ -218,7 +211,7 @@ set autowrite
 "numbers
 set numberwidth=5
 set number
-"set relativenumber
+set relativenumber
 
 " Quicker window movement
 nnoremap <C-j> <C-w>j
@@ -232,7 +225,7 @@ set diffopt+=vertical
 nnoremap <silent> <leader>n :nohlsearch <CR>
 
 let g:lightline = {
-      \ 'colorscheme': 'gruvbox',
+      \ 'colorscheme': 'palenight',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
