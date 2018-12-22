@@ -8,11 +8,12 @@ Plug 'junegunn/fzf.vim'
 
 "Auto completion and linting
 Plug 'w0rp/ale'
-Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
+Plug 'roxma/nvim-yarp'
+Plug 'ncm2/ncm2'
 Plug 'autozimu/LanguageClient-neovim', {
-            \ 'branch': 'next',
-            \ 'do': 'bash install.sh',
-            \ } 
+      \ 'branch': 'next',
+      \ 'do': 'bash install.sh',
+      \ } 
 
 Plug 'itchyny/lightline.vim'
 
@@ -22,6 +23,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-vinegar'
+Plug 'justinmk/vim-dirvish'
 Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
 Plug 'unblevable/quick-scope'
@@ -38,11 +40,12 @@ Plug 'leafgarland/typescript-vim'
 
 "Go Plugins
 Plug 'fatih/vim-go', {'do': ':GoInstallBinaries'}
-Plug 'zchee/deoplete-go', { 'do': 'make'}
+Plug 'ncm2/ncm2-go'
 
 "Colorscheme
 "Plug 'morhetz/gruvbox'
 Plug 'drewtempelmeyer/palenight.vim'
+Plug 'fatih/molokai'
 
 
 call plug#end()
@@ -90,13 +93,13 @@ let g:ale_completion_enabled = 1
 let g:ale_sign_error = ''
 let g:ale_sign_warning = ''
 let g:ale_linters = {
-            \ 'html': [ 'tsserver' ],
-            \ }
+      \ 'html': [ 'tsserver' ],
+      \ }
 let g:ale_fixers = {
-            \ 'javascript': [ 'prettier' ],
-            \ 'typescript': [ 'prettier' ],
-            \'html':['prettier']
-            \ }
+      \ 'javascript': [ 'prettier' ],
+      \ 'typescript': [ 'prettier' ],
+      \'html':['prettier']
+      \ }
 let g:ale_linter_aliases = { 'html': ['ts'] }
 
 let g:ale_javascript_prettier_options = '--single-quote --trailing-comma es5'
@@ -104,20 +107,25 @@ let g:ale_sign_column_always = 1
 let g:ale_fix_on_save =1
 
 let g:LanguageClient_serverCommands = {
-      \ 'typescript': ['typescript-language-server', '--stdio'],
+      \ 'typescript': ['javascript-typescript-stdio'],
       \ 'javascript': ['javascript-typescript-stdio'],
       \ 'javascript.jsx': ['javascript-typescript-stdio'],
       \ }
 
-let g:deoplete#enable_at_startup = 1
+"ncm-2 config
+" enable ncm2 for all buffers
+autocmd BufEnter  *  call ncm2#enable_for_buffer()
+set completeopt=noinsert,menuone,noselect
+
+let g:ncm2#popup_limit=10
 
 " Emmet setup
 let g:user_emmet_leader_key='<Tab>'
 let g:user_emmet_settings = {
-  \  'javascript.jsx' : {
-    \      'extends' : 'jsx',
-    \  },
-  \}
+      \  'javascript.jsx' : {
+      \      'extends' : 'jsx',
+      \  },
+      \}
 
 " js === jsx
 let g:jxs_ext_required = 0
@@ -149,12 +157,19 @@ let g:go_highlight_types = 1
 let g:go_highlight_fields = 1
 let g:go_highlight_functions=1
 let g:go_highlight_function_calls=1
+let g:go_auto_type_info = 1
 
 autocmd FileType go nmap <leader>b  <Plug>(go-build)
 autocmd FileType go nmap <leader>r  <Plug>(go-run)
 
 " Quick Scope Trigger a highlight in the appropriate direction when pressing these keys:
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+
+"Dirvish
+let g:loaded_netrwPlugin = 1
+command! -nargs=? -complete=dir Explore Dirvish <args>
+command! -nargs=? -complete=dir Sexplore belowright split | silent Dirvish <args>
+command! -nargs=? -complete=dir Vexplore leftabove vsplit | silent Dirvish <args>
 
 
 "Autoclose preview windows
@@ -164,15 +179,15 @@ syntax enable
 
 "Color settings
 if (has("termguicolors"))
- set termguicolors
+  set termguicolors
 endif
 
 "let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-"let g:gruvbox_contrast_dark='hard'
 colorscheme palenight
+
 set background=dark
-"let g:gruvbox_italic=1
 let g:palenight_terminal_italics=1
+set updatetime=100
 
 
 "Indenting
