@@ -22,7 +22,6 @@ Plug 'alvan/vim-closetag'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-vinegar'
 Plug 'justinmk/vim-dirvish'
 Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
@@ -43,10 +42,8 @@ Plug 'fatih/vim-go', {'do': ':GoInstallBinaries'}
 Plug 'ncm2/ncm2-go'
 
 "Colorscheme
-"Plug 'morhetz/gruvbox'
+Plug 'rakr/vim-one'
 Plug 'drewtempelmeyer/palenight.vim'
-Plug 'fatih/molokai'
-
 
 call plug#end()
 filetype plugin indent on 
@@ -79,6 +76,9 @@ nnoremap <Down> :echoe "Use j"<CR>
 
 "Exit out of normal mode and save
 imap <C-s> <esc>:w<cr>
+
+" Cycle through buffers
+nnoremap <leader><tab> :bn<CR>
 
 " Ctrl-c copies to system clipboard from visual mode
 vnoremap <C-c> "*y
@@ -113,11 +113,9 @@ let g:LanguageClient_serverCommands = {
       \ }
 
 "ncm-2 config
-" enable ncm2 for all buffers
+"enable ncm2 for all buffers
 autocmd BufEnter  *  call ncm2#enable_for_buffer()
 set completeopt=noinsert,menuone,noselect
-
-let g:ncm2#popup_limit=10
 
 " Emmet setup
 let g:user_emmet_leader_key='<Tab>'
@@ -139,28 +137,30 @@ hi ALEErrorSign guifg=#DF8C8C
 let g:ale_sign_warning = '⚬'
 hi ALEWarningSign guifg=#F2C38F
 
-"nnoremap \ :ag<SPACE>
 let $FZF_DEFAULT_COMMAND = 'ag --hidden -g ""'
 
 if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor
-
-  let g:ackprg = 'ag --vimgrep'
 endif
 
-nnoremap <c-p> :FZF<cr>
+nnoremap <c-p> :Files<cr>
+nnoremap <leader>g :Ag<Cr>
+nnoremap <leader>b :Buffers<Cr>
 
 
 " vim-go config 
 let g:go_fmt_command = "goimports"
-let g:go_highlight_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_functions=1
-let g:go_highlight_function_calls=1
 let g:go_auto_type_info = 1
 
-autocmd FileType go nmap <leader>b  <Plug>(go-build)
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_types = 1
+
 autocmd FileType go nmap <leader>r  <Plug>(go-run)
+autocmd FileType go nmap <Leader>i <Plug>(go-import)
 
 " Quick Scope Trigger a highlight in the appropriate direction when pressing these keys:
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
@@ -177,18 +177,18 @@ autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
 syntax enable
 
-"Color settings
+let g:one_allow_italics = 1
+colorscheme one
+set background=dark
+
+if (has("nvim"))
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+endif
 if (has("termguicolors"))
   set termguicolors
 endif
 
-"let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-colorscheme palenight
-
-set background=dark
-let g:palenight_terminal_italics=1
 set updatetime=100
-
 
 "Indenting
 set tabstop=2
@@ -240,7 +240,7 @@ set diffopt+=vertical
 nnoremap <silent> <leader>n :nohlsearch <CR>
 
 let g:lightline = {
-      \ 'colorscheme': 'palenight',
+      \ 'colorscheme': 'jellybeans',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
