@@ -23,7 +23,8 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 Plug 'justinmk/vim-dirvish'
-Plug 'honza/vim-snippets'
+Plug 'ncm2/ncm2-ultisnips'
+Plug 'SirVer/ultisnips'
 Plug 'jiangmiao/auto-pairs'
 Plug 'unblevable/quick-scope'
 
@@ -117,6 +118,14 @@ let g:LanguageClient_serverCommands = {
 autocmd BufEnter  *  call ncm2#enable_for_buffer()
 set completeopt=noinsert,menuone,noselect
 
+inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
+
+" c-j c-k for moving in snippet
+let g:UltiSnipsExpandTrigger		= "<Plug>(ultisnips_expand)"
+let g:UltiSnipsJumpForwardTrigger	= "<c-j>"
+let g:UltiSnipsJumpBackwardTrigger	= "<c-k>"
+let g:UltiSnipsRemoveSelectModeMappings = 0
+
 " Emmet setup
 let g:user_emmet_leader_key='<Tab>'
 let g:user_emmet_settings = {
@@ -151,6 +160,7 @@ nnoremap <leader>b :Buffers<Cr>
 " vim-go config 
 let g:go_fmt_command = "goimports"
 let g:go_auto_type_info = 1
+let g:go_snippet_engine="ultisnips"
 
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_extra_types = 1
