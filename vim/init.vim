@@ -22,8 +22,8 @@ Plug 'alvan/vim-closetag'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-unimpaired'
 Plug 'justinmk/vim-dirvish'
-Plug 'ncm2/ncm2-ultisnips'
 Plug 'SirVer/ultisnips'
 Plug 'jiangmiao/auto-pairs'
 Plug 'unblevable/quick-scope'
@@ -42,9 +42,12 @@ Plug 'leafgarland/typescript-vim'
 Plug 'fatih/vim-go', {'do': ':GoInstallBinaries'}
 Plug 'ncm2/ncm2-go'
 
+"Python
+Plug 'ncm2/ncm2-jedi'
+
 "Colorscheme
-Plug 'rakr/vim-one'
-Plug 'drewtempelmeyer/palenight.vim'
+Plug 'joshdick/onedark.vim'
+Plug 'sheerun/vim-polyglot'
 
 call plug#end()
 filetype plugin indent on 
@@ -88,6 +91,7 @@ vnoremap <C-c> "*y
 tnoremap <Esc> <C-\><C-n>
 
 let g:python3_host_prog='/usr/local/bin/python3'
+let g:python_host_prog='/usr/local/bin/python2'
 
 "Ale config
 let g:ale_completion_enabled = 1
@@ -118,10 +122,9 @@ let g:LanguageClient_serverCommands = {
 autocmd BufEnter  *  call ncm2#enable_for_buffer()
 set completeopt=noinsert,menuone,noselect
 
-inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
 
 " c-j c-k for moving in snippet
-let g:UltiSnipsExpandTrigger		= "<Plug>(ultisnips_expand)"
+let g:UltiSnipsExpandTrigger		= "<tab>"
 let g:UltiSnipsJumpForwardTrigger	= "<c-j>"
 let g:UltiSnipsJumpBackwardTrigger	= "<c-k>"
 let g:UltiSnipsRemoveSelectModeMappings = 0
@@ -149,7 +152,8 @@ hi ALEWarningSign guifg=#F2C38F
 let $FZF_DEFAULT_COMMAND = 'ag --hidden -g ""'
 
 if executable('ag')
-  set grepprg=ag\ --nogroup\ --nocolor
+  set grepprg=ag\ --nogroup\ --nocolor\ --column
+  set grepformat=%f:%l:%c%m
 endif
 
 nnoremap <c-p> :Files<cr>
@@ -185,11 +189,10 @@ command! -nargs=? -complete=dir Vexplore leftabove vsplit | silent Dirvish <args
 "Autoclose preview windows
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
-syntax enable
-
-let g:one_allow_italics = 1
-colorscheme one
+syntax on
+colorscheme onedark
 set background=dark
+let g:onedark_terminal_italics=1
 
 if (has("nvim"))
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
@@ -250,7 +253,7 @@ set diffopt+=vertical
 nnoremap <silent> <leader>n :nohlsearch <CR>
 
 let g:lightline = {
-      \ 'colorscheme': 'jellybeans',
+      \ 'colorscheme': 'onedark',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
