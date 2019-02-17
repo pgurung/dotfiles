@@ -34,8 +34,35 @@ nnoremap <Right> :echoe "Use l"<CR>
 nnoremap <Up> :echoe "Use k"<CR>
 nnoremap <Down> :echoe "Use j"<CR>
 
-"Save and exit out of insert mode
-imap <C-s> <esc>:w<cr>
+" Cycle through buffers
+nnoremap <leader><tab> :bn<CR>
+
+"Toggle netrw explorer with leader-e 
+"========================================
+let g:NetrwIsOpen=0
+
+function! ToggleNetrw()
+    if g:NetrwIsOpen
+        let i = bufnr("$")
+        while (i >= 1)
+            if (getbufvar(i, "&filetype") == "netrw")
+                silent exe "bwipeout " . i 
+            endif
+            let i-=1
+        endwhile
+        let g:NetrwIsOpen=0
+    else
+        let g:NetrwIsOpen=1
+        silent Lexplore
+        silent vertical resize 40
+    endif
+endfunction
+
+noremap <silent> <leader>e :call ToggleNetrw()<CR>
+
+"========================================
+" Ctrl-c copies to system clipboard from visual mode
+vnoremap <C-c> "*y
 
 "Autoclose preview windows
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
