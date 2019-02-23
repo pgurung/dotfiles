@@ -7,44 +7,50 @@ Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 
 "Auto completion and linting
-Plug 'w0rp/ale'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'autozimu/LanguageClient-neovim', {
-      \ 'branch': 'next',
-      \ 'do': ':UpdateRemotePlugins',
-      \ } 
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+" Use :call coc#util#build() to build after updating the plugin
 
+"Status Bar
 Plug 'itchyny/lightline.vim'
 
 "Utility and quality of life  
+"========================================
+
+"tpope's corner
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-fugitive'
 
+"Snippets
 Plug 'SirVer/ultisnips'
+
 Plug 'jiangmiao/auto-pairs'
-Plug 'unblevable/quick-scope'
 Plug 'justinmk/vim-sneak'
 Plug 'ludovicchabant/vim-gutentags'
-Plug 'sheerun/vim-polyglot'
 
+"Syntax highlighting
+Plug 'sheerun/vim-polyglot'
+Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+
+"Change the highlight to the color defined
+Plug 'ap/vim-css-color'
+
+"Move between windows using C-<hjkl>
 Plug 'christoomey/vim-tmux-navigator'
+"========================================
 
 "Writing plugins
 Plug 'junegunn/goyo.vim'
 
 "Javascript Plugins
-Plug 'ap/vim-css-color'
-Plug 'mattn/emmet-vim'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'leafgarland/typescript-vim'
 
 "Go Plugins
 Plug 'fatih/vim-go', {'do':'UpdateRemotePlugins'}
-Plug 'zchee/deoplete-go',    { 'do': 'make'}
 
 "Colorscheme
 Plug 'joshdick/onedark.vim'
@@ -91,6 +97,9 @@ let g:python3_host_prog='/usr/local/bin/python3'
 let g:python_host_prog='/usr/local/bin/python2'
 let g:python3_host_skip_check = 1
 
+"GraphQL syntax highlighting for .prisma files
+autocmd BufNewFile,BufRead *.prisma set syntax=graphql
+
 
 "Toggle netrw explorer with leader-e 
 "========================================
@@ -117,102 +126,41 @@ noremap <silent> <leader>e :call ToggleNetrw()<CR>
 
 "========================================
 
-"Ale config
+"COC config
 "========================================
-let g:ale_completion_enabled = 0
-let g:ale_linters = {
-      \ 'html': [ 'tsserver' ],
-      \ }
-let g:ale_fixers = {
-      \ 'javascript': [ 'prettier' ],
-      \ 'typescript': [ 'prettier' ],
-      \ 'javascript.jsx': [ 'prettier' ],
-      \ 'typescript.tsx': [ 'prettier' ],
-      \'html':['prettier']
-      \ }
-let g:ale_linter_aliases = { 'html': ['ts'] }
+"
+function! StatusDiagnostic() abort
+  let info = get(b:, 'coc_diagnostic_info', {})
+  if empty(info) | return '' | endif
+  let msgs = []
+  if get(info, 'error', 0)
+    call add(msgs, 'E' . info['error'])
+  endif
+  if get(info, 'warning', 0)
+    call add(msgs, 'W' . info['warning'])
+  endif
+  return join(msgs, ' '). ' ' . get(g:, 'coc_status', '')
+endfunction
 
-let g:ale_javascript_prettier_options = '--single-quote --trailing-comma es5'
-let g:ale_sign_column_always = 1
-let g:ale_fix_on_save =1
+set updatetime=300
+set signcolumn=yes
 
-let g:ale_sign_error ="❌" 
-let g:ale_sign_warning = "⚠"
-nmap <leader>f <Plug>(ale_fix)
-"========================================
+let s:coc_extensions = [
+      \ 'coc-snippets',
+      \ 'coc-tsserver',
+      \ 'coc-emmet',
+      \ 'coc-emoji'
+      \]
 
-"Language Client setup
-"========================================
-let g:LanguageClient_serverCommands = {
-      \ 'typescript': ['javascript-typescript-stdio'],
-      \ 'javascript': ['javascript-typescript-stdio'],
-      \ 'javascript.jsx': ['javascript-typescript-stdio'],
-      \ }
-let g:LanguageClient_diagnosticsDisplay= {
-      \        1: {
-      \      "name": "Error",
-      \      "texthl": "ALEError",
-      \      "signText": "❌",
-      \      "signTexthl": "ALEErrorSign",
-      \      "virtualTexthl": "Error",
-      \  },
-      \}
-
-let g:LanguageClient_useVirtualText = 0
-
-set completefunc=LanguageClient#complete
+inoremap <expr> <TAB> pumvisible() ? "\<C-y>" : "\<TAB>"
+let g:coc_snippet_next = '<TAB>'
+let g:coc_snippet_prev = '<S-TAB>'
+"Prettier config
+command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 "========================================
 
-"Deoplete configuration
-"========================================
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_smart_case = 1
-
-" disable autocomplete by default
-let b:deoplete_disable_auto_complete=1
-let g:deoplete_disable_auto_complete=1
-
-let g:deoplete#sources = {}
-let g:deoplete#sources#go#gocode_binary = '$GOPATH/bin/gocode'
-let g:deoplete#sources#go#unimported_packages = 1
-let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
-
-" Disable the candidates in Comment/String syntaxes.
-call deoplete#custom#source('_',
-      \ 'disabled_syntaxes', ['Comment', 'String'])
-
-call deoplete#custom#source('LanguageClient',
-      \ 'min_pattern_length',
-      \ 2)
-
-call deoplete#custom#option('sources', {
-      \ 'javascript': ['LanguageClient'],
-      \ 'typescript': ['LanguageClient'],
-      \ 'javascript.jsx': ['LanguageClient'],
-      \ 'typescript.tsx': ['LanguageClient'],
-      \})
-
-" ignored sources
-let g:deoplete#ignore_sources = {}
-let g:deoplete#ignore_sources._ = ['buffer', 'around']
-
-set completeopt+=noselect
-set completeopt+=noinsert
-
-" deoplete tab-complete
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-inoremap <c-space> <c-x><c-o>
-"========================================
-
-" c-j c-k for moving in snippet
-let g:UltiSnipsExpandTrigger		= "<tab>"
-let g:UltiSnipsJumpForwardTrigger	= "<c-j>"
-let g:UltiSnipsJumpBackwardTrigger	= "<c-k>"
-let g:UltiSnipsRemoveSelectModeMappings = 0
-
-" js === jsx
-let g:jsx_ext_required = 0
-
+"UltiSnips snippet files location
+let g:UltiSnipsSnippetDirectories=[$HOME.'/.config/nvim/UltiSnips']
 
 "FZF config
 "========================================
@@ -243,9 +191,6 @@ let g:go_highlight_types = 1
 autocmd FileType go nmap <leader>r  <Plug>(go-run)
 autocmd FileType go nmap <Leader>i <Plug>(go-import)
 "========================================
-
-" Quick Scope Trigger a highlight in the appropriate direction when pressing these keys:
-let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
 "Autoclose preview windows
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
@@ -300,12 +245,6 @@ set numberwidth=5
 set number
 set relativenumber
 
-" Quicker window movement
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-h> <C-w>h
-nnoremap <C-l> <C-w>l
-
 set diffopt+=vertical
 
 "Remove highlight after the search is done
@@ -315,9 +254,10 @@ let g:lightline = {
       \ 'colorscheme': 'onedark',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \             [ 'cocstatus','gitbranch', 'readonly', 'filename', 'modified' ] ]
       \ },
       \ 'component_function': {
-      \   'gitbranch': 'fugitive#head'
+      \   'gitbranch': 'fugitive#head',
+      \   'cocstatus': 'coc#status'
       \ },
       \ }
