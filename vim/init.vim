@@ -49,11 +49,9 @@ Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'leafgarland/typescript-vim'
 
-"Go Plugins
-Plug 'fatih/vim-go', {'do':'UpdateRemotePlugins'}
-
 "Colorscheme
 Plug 'joshdick/onedark.vim'
+Plug 'pgdouyon/vim-yin-yang'
 
 call plug#end()
 filetype plugin indent on 
@@ -86,6 +84,8 @@ nnoremap <Down> :echoe "Use j"<CR>
 
 " Cycle through buffers
 nnoremap <leader><tab> :bn<CR>
+"Delete all but the current buffer
+command! Bdall %bd!|e#|bd#
 
 " Ctrl-c copies to system clipboard from visual mode
 vnoremap <C-c> "*y
@@ -149,12 +149,23 @@ let s:coc_extensions = [
       \ 'coc-snippets',
       \ 'coc-tsserver',
       \ 'coc-emmet',
-      \ 'coc-emoji'
+      \ 'coc-emoji',
+      \'coc-prettier',
+      \'coc-css',
+      \'coc-ultisnips'
       \]
 
 inoremap <expr> <TAB> pumvisible() ? "\<C-y>" : "\<TAB>"
 let g:coc_snippet_next = '<TAB>'
 let g:coc_snippet_prev = '<S-TAB>'
+" Use `[c` and `]c` for navigate diagnostics
+nmap <silent> [c <Plug>(coc-diagnostic-prev)
+nmap <silent> ]c <Plug>(coc-diagnostic-next)
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gt <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 "Prettier config
 command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 "========================================
@@ -176,27 +187,29 @@ nnoremap <leader>g :Ag<Cr>
 nnoremap <leader>b :Buffers<Cr>
 "========================================
 
-" vim-go config 
+" GO config 
 "========================================
-let g:go_fmt_command = "goimports"
-let g:go_snippet_engine="ultisnips"
+"Map LEADER-r to run the current file in a vertical split
+autocmd FileType go nmap <leader>r :vsp term://go run %<cr>
+"========================================
+"
+"Writing configuration
+"========================================
+let g:goyo_width=100
 
-let g:go_highlight_build_constraints = 1
-let g:go_highlight_extra_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_function_calls = 1
-let g:go_highlight_types = 1
-
-autocmd FileType go nmap <leader>r  <Plug>(go-run)
-autocmd FileType go nmap <Leader>i <Plug>(go-import)
+augroup writeMode
+  au!
+  autocmd FileType md colorscheme yin
+  autocmd FileType text colorscheme yin
+augroup END
 "========================================
 
+"
 "Autoclose preview windows
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
 syntax on
-colorscheme onedark
+colorscheme onedark 
 set background=dark
 let g:onedark_terminal_italics=1
 
