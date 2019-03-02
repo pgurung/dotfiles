@@ -7,7 +7,7 @@ Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 
 "Auto completion and linting
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+Plug 'neoclide/coc.nvim', {'do':{->coc#util#build()}}
 " Use :call coc#util#build() to build after updating the plugin
 
 "Status Bar
@@ -27,7 +27,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'SirVer/ultisnips'
 
 Plug 'jiangmiao/auto-pairs'
-Plug 'justinmk/vim-sneak'
 Plug 'ludovicchabant/vim-gutentags'
 
 "Syntax highlighting
@@ -37,6 +36,9 @@ Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 "Change the highlight to the color defined
 Plug 'ap/vim-css-color'
 
+
+" Movement Plugins
+Plug 'easymotion/vim-easymotion'
 "Move between windows using C-<hjkl>
 Plug 'christoomey/vim-tmux-navigator'
 "========================================
@@ -87,6 +89,7 @@ nnoremap <leader><tab> :bn<CR>
 "Delete all but the current buffer
 command! Bdall %bd!|e#|bd#
 
+
 " Ctrl-c copies to system clipboard from visual mode
 vnoremap <C-c> "*y
 
@@ -100,6 +103,16 @@ let g:python3_host_skip_check = 1
 "GraphQL syntax highlighting for .prisma files
 autocmd BufNewFile,BufRead *.prisma set syntax=graphql
 
+"Easy motion config
+"========================================
+"Disable default mapping
+let g:EasyMotion_do_mapping = 0 
+
+"`s{char}{char}{label}` to navigate
+nmap s <Plug>(easymotion-overwin-f2)
+" Turn on case insensitive feature
+let g:EasyMotion_smartcase = 1
+"========================================
 
 "Toggle netrw explorer with leader-e 
 "========================================
@@ -220,12 +233,15 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
+set colorcolumn=81
 "Indenting
 set tabstop=2
 set shiftwidth=2
 set expandtab
 set shiftround
 set autoindent
+
+set foldmethod=marker
 
 set cursorline
 set spelllang=en
