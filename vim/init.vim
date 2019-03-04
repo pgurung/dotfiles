@@ -51,6 +51,9 @@ Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'leafgarland/typescript-vim'
 
+" Go Plugins
+Plug 'sebdah/vim-delve'
+
 "Colorscheme
 Plug 'joshdick/onedark.vim'
 Plug 'pgdouyon/vim-yin-yang'
@@ -92,6 +95,11 @@ command! Bdall %bd!|e#|bd#
 
 " Ctrl-c copies to system clipboard from visual mode
 vnoremap <C-c> "*y
+
+" Pasting from the system clipboard with LEADER-p
+nnoremap <silent> <leader>p "*p
+nnoremap <silent> <leader>P "*p
+xnoremap <silent> <leader>p "*p
 
 "Remap esc to C-\_C-n in terminal mode
 tnoremap <Esc> <C-\><C-n>
@@ -204,11 +212,14 @@ nnoremap <leader>b :Buffers<Cr>
 "========================================
 "Map LEADER-r to run the current file in a vertical split
 autocmd FileType go nmap <leader>r :vsp term://go run %<cr>
+
+"Map LEADER-d to debug the current file in a vertical split
+autocmd FileType go nmap <leader>d :vsp term://dlv debug %<cr>
 "========================================
 "
 "Writing configuration
 "========================================
-let g:goyo_width=100
+let g:goyo_width=80
 
 augroup writeMode
   au!
