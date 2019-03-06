@@ -51,12 +51,10 @@ Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'leafgarland/typescript-vim'
 
-" Go Plugins
-Plug 'sebdah/vim-delve'
-
 "Colorscheme
-Plug 'joshdick/onedark.vim'
+Plug 'junegunn/seoul256.vim'
 Plug 'pgdouyon/vim-yin-yang'
+Plug 'joshdick/onedark.vim'
 
 call plug#end()
 filetype plugin indent on 
@@ -220,12 +218,6 @@ autocmd FileType go nmap <leader>d :vsp term://dlv debug %<cr>
 "Writing configuration
 "========================================
 let g:goyo_width=80
-
-augroup writeMode
-  au!
-  autocmd FileType md colorscheme yin
-  autocmd FileType text colorscheme yin
-augroup END
 "========================================
 
 "
@@ -233,13 +225,9 @@ augroup END
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
 syntax on
-colorscheme onedark 
+colorscheme onedark
 set background=dark
-let g:onedark_terminal_italics=1
 
-if (has("nvim"))
-  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-endif
 if (has("termguicolors"))
   set termguicolors
 endif
