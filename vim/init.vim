@@ -52,7 +52,6 @@ Plug 'mxw/vim-jsx'
 Plug 'leafgarland/typescript-vim'
 
 "Colorscheme
-Plug 'junegunn/seoul256.vim'
 Plug 'pgdouyon/vim-yin-yang'
 Plug 'joshdick/onedark.vim'
 
