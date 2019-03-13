@@ -68,7 +68,6 @@ nmap 0 ^
 nmap k gk
 nmap j gj
 imap jk <esc>
-imap kj <esc>
 
 "Common Typos
 command! Q q
@@ -84,8 +83,6 @@ nnoremap <Right> :echoe "Use l"<CR>
 nnoremap <Up> :echoe "Use k"<CR>
 nnoremap <Down> :echoe "Use j"<CR>
 
-" Cycle through buffers
-nnoremap <leader><tab> :bn<CR>
 "Delete all but the current buffer
 command! Bdall %bd!|e#|bd#
 
@@ -100,6 +97,8 @@ xnoremap <silent> <leader>p "*p
 
 "Remap esc to C-\_C-n in terminal mode
 tnoremap <Esc> <C-\><C-n>
+" Start the terminal in insert mode
+au BufEnter term://* startinsert
 
 let g:python3_host_prog='/usr/local/bin/python3'
 let g:python_host_prog='/usr/local/bin/python2'
@@ -208,10 +207,10 @@ nnoremap <leader>b :Buffers<Cr>
 " GO config 
 "========================================
 "Map LEADER-r to run the current file in a vertical split
-autocmd FileType go nmap <leader>r :vsp term://go run %<cr>
+autocmd FileType go nmap <leader>r :w<CR>:vsp term://go run %<cr>
 
 "Map LEADER-d to debug the current file in a vertical split
-autocmd FileType go nmap <leader>d :vsp term://dlv debug %<cr>
+autocmd FileType go nmap <leader>d :w<CR>:vsp term://dlv debug %<cr>
 "========================================
 "
 "Writing configuration
