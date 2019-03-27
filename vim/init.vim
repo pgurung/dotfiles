@@ -8,7 +8,6 @@ Plug 'junegunn/fzf.vim'
 
 "Auto completion and linting
 Plug 'neoclide/coc.nvim', {'do':{->coc#util#build()}}
-" Use :call coc#util#build() to build after updating the plugin
 
 "Status Bar
 Plug 'itchyny/lightline.vim'
@@ -142,6 +141,8 @@ endfunction
 noremap <silent> <leader>e :call ToggleNetrw()<CR>
 
 "========================================
+"Tree Style listing for Netrw
+let g:netrw_liststyle=3
 
 "COC config
 "========================================
@@ -192,15 +193,15 @@ let g:UltiSnipsSnippetDirectories=[$HOME.'/.config/nvim/UltiSnips']
 
 "FZF config
 "========================================
-let $FZF_DEFAULT_COMMAND = 'ag --hidden -g ""'
+"let $FZF_DEFAULT_COMMAND = 'rg --files --no-ignore-vcs --hidden'
 
 if executable('ag')
-  set grepprg=ag\ --nogroup\ --nocolor\ --column
+  set grepprg=rg\ --color=never
   set grepformat=%f:%l:%c%m
 endif
 
 nnoremap <c-p> :Files<cr>
-nnoremap <leader>g :Ag<Cr>
+nnoremap <leader>g :Rg<Cr>
 nnoremap <leader>b :Buffers<Cr>
 "========================================
 
@@ -212,6 +213,11 @@ autocmd FileType go nmap <leader>r :w<CR>:vsp term://go run %<cr>
 "Map LEADER-d to debug the current file in a vertical split
 autocmd FileType go nmap <leader>d :w<CR>:vsp term://dlv debug %<cr>
 "========================================
+"
+"Python Config
+"========================================
+"LEADER-r mapping to run the current file in a vertical split
+autocmd FileType python nmap <leader>r :w<CR>:vsp term://python3 %<cr>
 "
 "Writing configuration
 "========================================
@@ -269,7 +275,7 @@ set autowrite
 "numbers
 set numberwidth=5
 set number
-set relativenumber
+"set relativenumber
 
 set diffopt+=vertical
 
