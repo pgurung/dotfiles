@@ -131,6 +131,7 @@ function! ToggleNetrw()
             let i-=1
         endwhile
         let g:NetrwIsOpen=0
+        let g:netrw_chgwin=-1
     else
         let g:NetrwIsOpen=1
         silent Lexplore
