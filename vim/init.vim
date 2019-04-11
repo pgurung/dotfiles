@@ -94,6 +94,7 @@ nnoremap <silent> <leader>p "*p
 nnoremap <silent> <leader>P "*p
 xnoremap <silent> <leader>p "*p
 
+nmap <silent> <leader>t :vsp term://zsh<cr>
 "Remap esc to C-\_C-n in terminal mode
 tnoremap <Esc> <C-\><C-n>
 " Start the terminal in insert mode
@@ -147,7 +148,7 @@ let g:netrw_liststyle=3
 
 "COC config
 "========================================
-"
+
 function! StatusDiagnostic() abort
   let info = get(b:, 'coc_diagnostic_info', {})
   if empty(info) | return '' | endif
@@ -163,16 +164,6 @@ endfunction
 
 set updatetime=300
 set signcolumn=yes
-
-let s:coc_extensions = [
-      \ 'coc-snippets',
-      \ 'coc-tsserver',
-      \ 'coc-emmet',
-      \ 'coc-emoji',
-      \'coc-prettier',
-      \'coc-css',
-      \'coc-ultisnips'
-      \]
 
 inoremap <expr> <TAB> pumvisible() ? "\<C-y>" : "\<TAB>"
 let g:coc_snippet_next = '<TAB>'
@@ -236,6 +227,10 @@ set background=dark
 if (has("termguicolors"))
   set termguicolors
 endif
+
+
+hi CocWarningSign  ctermfg=Yellow guifg=#fab005
+hi CocInfoSign  ctermfg=Blue guifg=#15aabf
 
 set colorcolumn=81
 "Indenting
