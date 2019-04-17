@@ -26,7 +26,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'SirVer/ultisnips'
 
 Plug 'jiangmiao/auto-pairs'
-Plug 'ludovicchabant/vim-gutentags'
 
 "Syntax highlighting
 Plug 'sheerun/vim-polyglot'
@@ -204,6 +203,16 @@ autocmd FileType go nmap <leader>r :w<CR>:vsp term://go run %<cr>
 
 "Map LEADER-d to debug the current file in a vertical split
 autocmd FileType go nmap <leader>d :w<CR>:vsp term://dlv debug %<cr>
+
+" Call goimports on the current file on save
+function! GoImport()
+  silent exe '!goimports -w=true %'
+  silent e %
+endfunction
+
+autocmd! BufWritePre *.go :call GoImport()
+"autocmd BufWritePost *.go :w<CR>:!goimports -w=true %<CR>:e %<CR><CR>
+
 "========================================
 "
 "Python Config
@@ -221,8 +230,9 @@ let g:goyo_width=80
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
 syntax on
+let g:onedark_terminal_italics=1
 colorscheme onedark
-set background=dark
+"set background=dark
 
 if (has("termguicolors"))
   set termguicolors
@@ -231,6 +241,7 @@ endif
 
 hi CocWarningSign  ctermfg=Yellow guifg=#fab005
 hi CocInfoSign  ctermfg=Blue guifg=#15aabf
+hi CocErrorFloat ctermfg=red guifg=#E06C75
 
 set colorcolumn=81
 "Indenting
@@ -242,7 +253,9 @@ set autoindent
 
 set foldmethod=marker
 
-set cursorline
+"Causes graohics issues inside tmux in certain files
+"set cursorline
+
 set spelllang=en
 
 "Allow mouse
