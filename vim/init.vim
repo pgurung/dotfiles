@@ -28,7 +28,6 @@ Plug 'SirVer/ultisnips'
 Plug 'jiangmiao/auto-pairs'
 
 "Syntax highlighting
-"Plug 'sheerun/vim-polyglot'
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 
 "Change the highlight to the color defined
@@ -51,9 +50,6 @@ Plug 'mxw/vim-jsx'
 Plug 'leafgarland/typescript-vim'
 
 "Colorscheme
-Plug 'pgdouyon/vim-yin-yang'
-Plug 'joshdick/onedark.vim'
-Plug 'owickstrom/vim-colors-paramount'
 Plug 'NLKNguyen/papercolor-theme'
 
 call plug#end()
@@ -227,15 +223,15 @@ if (has("termguicolors"))
 endif
 
 syntax on
-"let g:onedark_terminal_italics=1
 set background=light
 colorscheme PaperColor
 
 
-hi CocWarningSign  ctermfg=Yellow guifg=#fab005
-hi CocInfoSign  ctermfg=Blue guifg=#15aabf
+hi CocWarningSign  ctermfg=239 guifg=#4e4e4e
+hi CocErrorSign ctermfg=239 guifg=#4e4e4e
+hi CocInfoSign  ctermfg=81 guifg=#5fd7ff
 hi CocErrorFloat ctermfg=232 guifg=#080808
-hi CocWarnFloat ctermfg=235 guifg=#262626
+hi CocWarningFloat ctermfg=239 guifg=#4e4e4e
 
 set colorcolumn=81
 "Indenting
