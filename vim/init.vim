@@ -28,7 +28,7 @@ Plug 'SirVer/ultisnips'
 Plug 'jiangmiao/auto-pairs'
 
 "Syntax highlighting
-Plug 'sheerun/vim-polyglot'
+"Plug 'sheerun/vim-polyglot'
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 
 "Change the highlight to the color defined
@@ -36,7 +36,8 @@ Plug 'ap/vim-css-color'
 
 
 " Movement Plugins
-Plug 'easymotion/vim-easymotion'
+Plug 'justinmk/vim-sneak'
+
 "Move between windows using C-<hjkl>
 Plug 'christoomey/vim-tmux-navigator'
 "========================================
@@ -52,6 +53,8 @@ Plug 'leafgarland/typescript-vim'
 "Colorscheme
 Plug 'pgdouyon/vim-yin-yang'
 Plug 'joshdick/onedark.vim'
+Plug 'owickstrom/vim-colors-paramount'
+Plug 'NLKNguyen/papercolor-theme'
 
 call plug#end()
 filetype plugin indent on 
@@ -105,17 +108,6 @@ let g:python3_host_skip_check = 1
 
 "GraphQL syntax highlighting for .prisma files
 autocmd BufNewFile,BufRead *.prisma set syntax=graphql
-
-"Easy motion config
-"========================================
-"Disable default mapping
-let g:EasyMotion_do_mapping = 0 
-
-"`s{char}{char}{label}` to navigate
-nmap s <Plug>(easymotion-overwin-f2)
-" Turn on case insensitive feature
-let g:EasyMotion_smartcase = 1
-"========================================
 
 "Toggle netrw explorer with leader-e 
 "========================================
@@ -229,19 +221,21 @@ let g:goyo_width=80
 "Autoclose preview windows
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
-syntax on
-let g:onedark_terminal_italics=1
-colorscheme onedark
-"set background=dark
 
 if (has("termguicolors"))
   set termguicolors
 endif
 
+syntax on
+"let g:onedark_terminal_italics=1
+set background=light
+colorscheme PaperColor
+
 
 hi CocWarningSign  ctermfg=Yellow guifg=#fab005
 hi CocInfoSign  ctermfg=Blue guifg=#15aabf
-hi CocErrorFloat ctermfg=red guifg=#E06C75
+hi CocErrorFloat ctermfg=232 guifg=#080808
+hi CocWarnFloat ctermfg=235 guifg=#262626
 
 set colorcolumn=81
 "Indenting
@@ -292,7 +286,7 @@ set diffopt+=vertical
 nnoremap <silent> <leader>n :nohlsearch <CR>
 
 let g:lightline = {
-      \ 'colorscheme': 'onedark',
+      \ 'colorscheme': 'PaperColor',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'cocstatus','gitbranch', 'readonly', 'filename', 'modified' ] ]
