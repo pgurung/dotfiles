@@ -227,8 +227,8 @@ set background=light
 colorscheme PaperColor
 
 
-hi CocWarningSign  ctermfg=239 guifg=#4e4e4e
-hi CocErrorSign ctermfg=239 guifg=#4e4e4e
+hi CocWarningSign  ctermfg=214 guifg=#ffaf00
+hi CocErrorSign ctermfg=196 guifg=#ff0000
 hi CocInfoSign  ctermfg=81 guifg=#5fd7ff
 hi CocErrorFloat ctermfg=232 guifg=#080808
 hi CocWarningFloat ctermfg=239 guifg=#4e4e4e
