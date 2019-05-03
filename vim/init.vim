@@ -234,6 +234,7 @@ hi CocErrorFloat ctermfg=232 guifg=#080808
 hi CocWarningFloat ctermfg=239 guifg=#4e4e4e
 
 set colorcolumn=81
+
 "Indenting
 set tabstop=2
 set shiftwidth=2
