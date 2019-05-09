@@ -105,6 +105,9 @@ let g:python3_host_skip_check = 1
 "GraphQL syntax highlighting for .prisma files
 autocmd BufNewFile,BufRead *.prisma set syntax=graphql
 
+"Tree Style listing for Netrw
+let g:netrw_liststyle=3
+
 "Toggle netrw explorer with leader-e 
 "========================================
 let g:NetrwIsOpen=0
@@ -130,8 +133,6 @@ endfunction
 noremap <silent> <leader>e :call ToggleNetrw()<CR>
 
 "========================================
-"Tree Style listing for Netrw
-let g:netrw_liststyle=3
 
 "COC config
 "========================================
