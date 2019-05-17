@@ -246,7 +246,7 @@ set autoindent
 set foldmethod=marker
 
 "Causes graohics issues inside tmux in certain files
-"set cursorline
+set cursorline
 
 set spelllang=en
 
