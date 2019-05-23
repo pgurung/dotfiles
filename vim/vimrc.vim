@@ -87,15 +87,17 @@ if (has("termguicolors"))
  set termguicolors
 endif
 
-"let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-set background=dark
+set background=light
 
+set colorcolumn=81
 "Indenting
 set tabstop=2
 set shiftwidth=2
 set expandtab
 set shiftround
 set autoindent
+
+set foldmethod=marker
 
 set cursorline
 set spelllang=en
