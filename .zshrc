@@ -174,3 +174,9 @@ export FZF_DEFAULT_OPTS="
 
 _gen_fzf_default_opts
 
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/pranamgurung/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/pranamgurung/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/pranamgurung/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/pranamgurung/google-cloud-sdk/completion.zsh.inc'; fi

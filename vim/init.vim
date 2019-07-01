@@ -7,7 +7,7 @@ Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 
 "Auto completion and linting
-Plug 'neoclide/coc.nvim', {'do':{->coc#util#build()}}
+Plug 'neoclide/coc.nvim' ", {'do':{->coc#util#install()}}
 
 "Status Bar
 Plug 'itchyny/lightline.vim'
@@ -32,10 +32,6 @@ Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 
 "Change the highlight to the color defined
 Plug 'ap/vim-css-color'
-
-
-" Movement Plugins
-Plug 'justinmk/vim-sneak'
 
 "Move between windows using C-<hjkl>
 Plug 'christoomey/vim-tmux-navigator'
