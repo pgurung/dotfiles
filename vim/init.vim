@@ -7,7 +7,7 @@ Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 
 "Auto completion and linting
-Plug 'neoclide/coc.nvim' ", {'do':{->coc#util#install()}}
+Plug 'neoclide/coc.nvim' , {'branch': 'release'}
 
 "Status Bar
 Plug 'itchyny/lightline.vim'
@@ -39,11 +39,6 @@ Plug 'christoomey/vim-tmux-navigator'
 
 "Writing plugins
 Plug 'junegunn/goyo.vim'
-
-"Javascript Plugins
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
-Plug 'leafgarland/typescript-vim'
 
 "Colorscheme
 Plug 'NLKNguyen/papercolor-theme'
