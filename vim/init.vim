@@ -29,6 +29,7 @@ Plug 'jiangmiao/auto-pairs'
 
 "Syntax highlighting
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+Plug 'sheerun/vim-polyglot'
 
 "Change the highlight to the color defined
 Plug 'ap/vim-css-color'
@@ -64,12 +65,6 @@ command! QA qall
 command! E e
 command! W w
 command! Wq wq
-
-" Disable arrow Keys
-nnoremap <Left> :echoe "Use h"<CR>
-nnoremap <Right> :echoe "Use l"<CR>
-nnoremap <Up> :echoe "Use k"<CR>
-nnoremap <Down> :echoe "Use j"<CR>
 
 "Delete all but the current buffer
 command! Bdall %bd!|e#|bd#
@@ -269,6 +264,8 @@ set numberwidth=5
 set number
 "set relativenumber
 
+set wildoptions+=pum
+set wildoptions+=tagfile
 set diffopt+=vertical
 
 "Remove highlight after the search is done
