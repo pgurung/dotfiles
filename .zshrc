@@ -147,22 +147,22 @@ fi
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 _gen_fzf_default_opts() {
 
-local color00='#f7f7f7'
-local color01='#e3e3e3'
-local color02='#b9b9b9'
-local color03='#ababab'
-local color04='#525252'
-local color05='#464646'
-local color06='#252525'
-local color07='#101010'
-local color08='#7c7c7c'
-local color09='#999999'
-local color0A='#a0a0a0'
-local color0B='#8e8e8e'
-local color0C='#868686'
-local color0D='#686868'
-local color0E='#747474'
-local color0F='#5e5e5e'
+local color00='#282828'
+local color01='#3c3836'
+local color02='#504945'
+local color03='#665c54'
+local color04='#bdae93'
+local color05='#d5c4a1'
+local color06='#ebdbb2'
+local color07='#fbf1c7'
+local color08='#fb4934'
+local color09='#fe8019'
+local color0A='#fabd2f'
+local color0B='#b8bb26'
+local color0C='#8ec07c'
+local color0D='#83a598'
+local color0E='#d3869b'
+local color0F='#d65d0e'
 
 export FZF_DEFAULT_OPTS="
   --color=bg+:$color01,bg:$color00,spinner:$color0C,hl:$color0D
