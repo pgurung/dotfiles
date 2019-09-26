@@ -197,7 +197,7 @@ autocmd FileType python nmap <leader>r :w<CR>:vsp term://python3 %<cr>
 "
 "Writing configuration
 "========================================
-let g:goyo_width=80
+let g:goyo_width=100
 "========================================
 
 "
