@@ -180,13 +180,7 @@ autocmd FileType go nmap <leader>r :w<CR>:vsp term://go run %<cr>
 autocmd FileType go nmap <leader>d :w<CR>:vsp term://dlv debug %<cr>
 
 " Call goimports on the current file on save
-function! GoImport()
-  silent exe '!goimports -w=true %'
-  silent e %
-endfunction
-
-autocmd! BufWritePre *.go :call GoImport()
-"autocmd BufWritePost *.go :w<CR>:!goimports -w=true %<CR>:e %<CR><CR>
+autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
 
 "========================================
 "
