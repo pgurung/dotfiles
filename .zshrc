@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-  # export PATH=$HOME/bin:/usr/local/bin:$PATH
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/pranamgurung/.oh-my-zsh
@@ -24,8 +24,8 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 fe() {
   local files
   IFS=$'\n' files=($(fzf-tmux --query="$1" --multi --select-1 --exit-0))
-    [[ -n "$files" ]] && ${EDITOR:-nvim} "${files[@]}"
-  }
+  [[ -n "$files" ]] && ${EDITOR:-nvim} "${files[@]}"
+}
 
 alias py='python3'
 
@@ -38,9 +38,9 @@ alias ctags="`brew --prefix`/bin/ctags"
 export EDITOR=/usr/local/bin/nvim
 
 # Set name of the theme to load. Optionally, if you set this to "random"
-  # it'll load a random theme each time that oh-my-zsh is loaded.
-  # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-  ZSH_THEME="refined"
+# it'll load a random theme each time that oh-my-zsh is loaded.
+# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+ZSH_THEME="refined"
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
@@ -52,11 +52,11 @@ export EDITOR=/usr/local/bin/nvim
 fpath=(/usr/local/share/zsh-completions $fpath)
 
 # Uncomment the following line to use case-sensitive completion.
-  # CASE_SENSITIVE="true"
+# CASE_SENSITIVE="true"
 
 # Uncomment the following line to use hyphen-insensitive completion. Case
-  # sensitive completion must be off. _ and - will be interchangeable.
-  # HYPHEN_INSENSITIVE="true"
+# sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
@@ -74,17 +74,17 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 # ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-  COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
-  # under VCS as dirty. This makes repository status check for large repositories
-    # much, much faster.
-    # DISABLE_UNTRACKED_FILES_DIRTY="true"
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Uncomment the following line if you want to change the command execution time
-  # stamp shown in the history command output.
-  # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-  # HIST_STAMPS="mm/dd/yyyy"
+# stamp shown in the history command output.
+# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -94,12 +94,12 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-git
-zsh-autosuggestions
-z
-zsh-syntax-highlighting
-docker
-colored-man-pages
+  git
+  zsh-autosuggestions
+  z
+  zsh-syntax-highlighting
+  docker
+  colored-man-pages
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -144,35 +144,35 @@ if [[ -z $TMUX ]]; then
   unset sessions
 fi
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 _gen_fzf_default_opts() {
 
-local color00='#282828'
-local color01='#3c3836'
-local color02='#504945'
-local color03='#665c54'
-local color04='#bdae93'
-local color05='#d5c4a1'
-local color06='#ebdbb2'
-local color07='#fbf1c7'
-local color08='#fb4934'
-local color09='#fe8019'
-local color0A='#fabd2f'
-local color0B='#b8bb26'
-local color0C='#8ec07c'
-local color0D='#83a598'
-local color0E='#d3869b'
-local color0F='#d65d0e'
+  local color00='#282828'
+  local color01='#3c3836'
+  local color02='#504945'
+  local color03='#665c54'
+  local color04='#bdae93'
+  local color05='#d5c4a1'
+  local color06='#ebdbb2'
+  local color07='#fbf1c7'
+  local color08='#fb4934'
+  local color09='#fe8019'
+  local color0A='#fabd2f'
+  local color0B='#b8bb26'
+  local color0C='#8ec07c'
+  local color0D='#83a598'
+  local color0E='#d3869b'
+  local color0F='#d65d0e'
 
-export FZF_DEFAULT_OPTS="
+  export FZF_DEFAULT_OPTS="
   --color=bg+:$color01,bg:$color00,spinner:$color0C,hl:$color0D
   --color=fg:$color04,header:$color0D,info:$color0A,pointer:$color0C
   --color=marker:$color0C,fg+:$color06,prompt:$color0A,hl+:$color0D
-"
+  "
 
 }
 
 _gen_fzf_default_opts
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 
 # The next line updates PATH for the Google Cloud SDK.
