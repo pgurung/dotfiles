@@ -7,12 +7,16 @@ Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 
 "Auto completion and linting
-Plug 'neoclide/coc.nvim' , {'branch': 'release'}
+" Plug 'neoclide/coc.nvim' , {'branch': 'release'}
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/deoplete-lsp'
+Plug 'neovim/nvim-lsp'
+Plug 'Chiel92/vim-autoformat'
 
 "Status Bar
 Plug 'itchyny/lightline.vim'
 
-"Utility and quality of life  
+"Utility and quality of life
 "========================================
 
 "tpope's corner
@@ -45,7 +49,7 @@ Plug 'junegunn/goyo.vim'
 Plug 'chriskempson/base16-vim'
 
 call plug#end()
-filetype plugin indent on 
+filetype plugin indent on
 runtime macros/matchit.vim
 
 let mapleader = ' '
@@ -94,64 +98,52 @@ autocmd BufNewFile,BufRead *.prisma set syntax=graphql
 "Tree Style listing for Netrw
 let g:netrw_liststyle=3
 
-"Toggle netrw explorer with leader-e 
+"Toggle netrw explorer with leader-e
 "========================================
 let g:NetrwIsOpen=0
 
 function! ToggleNetrw()
-    if g:NetrwIsOpen
-        let i = bufnr("$")
-        while (i >= 1)
-            if (getbufvar(i, "&filetype") == "netrw")
-                silent exe "bwipeout " . i 
-            endif
-            let i-=1
-        endwhile
-        let g:NetrwIsOpen=0
-        let g:netrw_chgwin=-1
-    else
-        let g:NetrwIsOpen=1
-        silent Lexplore
-        silent vertical resize 40
-    endif
+  if g:NetrwIsOpen
+    let i = bufnr("$")
+    while (i >= 1)
+      if (getbufvar(i, "&filetype") == "netrw")
+        silent exe "bwipeout " . i
+      endif
+      let i-=1
+    endwhile
+    let g:NetrwIsOpen=0
+    let g:netrw_chgwin=-1
+  else
+    let g:NetrwIsOpen=1
+    silent Lexplore
+    silent vertical resize 40
+  endif
 endfunction
 
 noremap <silent> <leader>e :call ToggleNetrw()<CR>
 
 "========================================
-
-"COC config
+"Neovim LSP Config
 "========================================
+lua << EOF
+local nvim_lsp = require('nvim_lsp')
 
-function! StatusDiagnostic() abort
-  let info = get(b:, 'coc_diagnostic_info', {})
-  if empty(info) | return '' | endif
-  let msgs = []
-  if get(info, 'error', 0)
-    call add(msgs, 'E' . info['error'])
-  endif
-  if get(info, 'warning', 0)
-    call add(msgs, 'W' . info['warning'])
-  endif
-  return join(msgs, ' '). ' ' . get(g:, 'coc_status', '')
-endfunction
+nvim_lsp.tsserver.setup{}
 
-set updatetime=300
-set signcolumn=yes
+nvim_lsp.rust_analyzer.setup{}
 
-inoremap <expr> <TAB> pumvisible() ? "\<C-y>" : "\<TAB>"
-let g:coc_snippet_next = '<TAB>'
-let g:coc_snippet_prev = '<S-TAB>'
-" Use `[c` and `]c` for navigate diagnostics
-nmap <silent> [c <Plug>(coc-diagnostic-prev)
-nmap <silent> ]c <Plug>(coc-diagnostic-next)
-" Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gt <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-"Prettier config
-command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
+EOF
+
+set omnifunc=v:lua.vim.lsp.omnifunc
+set completeopt-=preview
+
+let g:deoplete#enable_at_startup = 1
+call deoplete#custom#source('_', 'max_menu_width', 80)
+
+"========================================
+" rustfmt on write using autoformat
+" autocmd BufWrite * :Autoformat
+
 "========================================
 
 "UltiSnips snippet files location
@@ -194,16 +186,13 @@ nnoremap <leader>g :Rg<Cr>
 nnoremap <leader>b :Buffers<Cr>
 "========================================
 
-" GO config 
+" GO config
 "========================================
 "Map LEADER-r to run the current file in a vertical split
 autocmd FileType go nmap <leader>r :w<CR>:vsp term://go run %<cr>
 
 "Map LEADER-d to debug the current file in a vertical split
 autocmd FileType go nmap <leader>d :w<CR>:vsp term://dlv debug %<cr>
-
-" Call goimports on the current file on save
-autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
 
 "========================================
 "
@@ -228,14 +217,6 @@ endif
 
 syntax on
 colorscheme base16-gruvbox-dark-medium
-
-
-
-" hi CocWarningSign  ctermfg=214 guifg=#ffaf00
-" hi CocErrorSign ctermfg=196 guifg=#ff0000
-" hi CocInfoSign  ctermfg=81 guifg=#5fd7ff
-" hi CocErrorFloat ctermfg=232 guifg=#080808
-" hi CocWarningFloat ctermfg=239 guifg=#4e4e4e
 
 set colorcolumn=100
 
@@ -292,10 +273,9 @@ let g:lightline = {
       \ 'colorscheme': 'jellybeans',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'cocstatus','gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
       \ },
       \ 'component_function': {
       \   'gitbranch': 'fugitive#head',
-      \   'cocstatus': 'coc#status'
       \ },
       \ }

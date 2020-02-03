@@ -30,6 +30,7 @@ fe() {
 alias py='python3'
 
 alias ta='tmux attach'
+alias lg='lazygit'
 
 #change default ctaf to exuberant-ctags
 alias ctags="`brew --prefix`/bin/ctags"
@@ -180,3 +181,5 @@ if [ -f '/Users/pranamgurung/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/pr
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/pranamgurung/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/pranamgurung/google-cloud-sdk/completion.zsh.inc'; fi
+
+export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
